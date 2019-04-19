@@ -1,5 +1,4 @@
 @include('common.header')
-        <br><br>
        
             <section id="bg-01">
                 <div class="section-conts">
@@ -8,7 +7,7 @@
                     <p>引きの画が欲しい方は登録お願いします。ボランティアスタッフ募集も歓迎です！</p>
                     <p>端役でもいいから出演したい人は検索してください！</p>
                   </div>
-                <div>    
+                </div>    
             </section>
             
         
@@ -36,10 +35,10 @@
                                         <a href="/original/public/detail?id={{$item->id}}">{{$item->title}}</a><br>
                                     </td>
                                     <td class="time">
-                                        <a href="/original/public/detail?id={{$item->id}}">{{$item->deadline}}</a>
+                                        <p>{{$item->deadline}}</p>
                                     </td>
-                                    <td class="long">
-                                        <a href="/original/public/detail?id={{$item->id}}">{{$item->role}}</a>
+                                    <td class="role">
+                                        <p>{{$item->role}}</p>
                                     </td>
                                 </tr>
                                 @endforeach

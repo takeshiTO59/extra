@@ -140,7 +140,7 @@ td{
   font-size: 1em;
 }
 
-.long{
+.role{
  word-wrap:break-word;
 }
 
@@ -167,7 +167,24 @@ input[name="search"]{
   width:100%;
 }
 
-input[value="確認画面へ"]{
+/*input[value="確認画面へ"]{
+  display: block; 
+  text-decoration: none;
+  text-align: center;
+  border-radius: 5px; /*角丸*/
+/*  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  background-color: #00bfe6;
+  color:#ffffff;
+  margin: 20px auto;
+  
+}*/
+
+.radio{
+  
+}
+
+.input{
   display: block; 
   text-decoration: none;
   text-align: center;
@@ -180,7 +197,7 @@ input[value="確認画面へ"]{
   
 }
 
-input[value="確認画面へ"]:hover{
+.input:hover{
   background-color: #00d5ff; /*ボタン色*/
   
 }
@@ -190,6 +207,13 @@ input[value="確認画面へ"]:hover{
   position: relative; /*相対位置*/
   
   box-sizing: border-box;/*←全て含めてmin-height:100vhに*/
+}
+
+.list{
+  display: block; 
+  text-decoration: none;
+  text-align: center;
+  margin: 20px auto;
 }
 
 footer{
