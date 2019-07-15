@@ -19,21 +19,20 @@
                         
                         <div class="form-group">
                         @if ($errors->has('nickname'))
-                            <label for="nickname">主催者ニックネーム<span class="label label-danger">必須</span><font color="red">ニックネームが入力されていません。</font></label>
+                            <label for="nickname">組織 (会社・学校・グループ等)<span class="label label-danger">必須</span><font color="red">ニックネームが入力されていません。</font></label>
                             <input type="text" name="nickname" class="form-control" />
-                        
                         @else 
-                            <label for="nickname">主催者ニックネーム<span class="label label-danger">必須</span></label>
+                            <label for="nickname">組織 (会社・学校・グループ等)<span class="label label-danger">必須</span></label>
                             <input type="text" name="nickname" class="form-control" value="{{$form->nickname}}"/>
                         @endif
                         </div>
                          <div class="form-group">
                         @if ($errors->has('password'))
                             <label for="password">パスワード<span class="label label-danger">必須</span><font color="red">パスワードが入力されていません。</font></label>
-                            <input type="password" name="password" class="form-control" value="{{$form->password}}"/>
+                            <input type="password" name="password" class="form-control" />
                         @else 
                             <label for="password">パスワード<span class="label label-danger">必須</span></label>
-                            <input type="password" name="password" class="form-control" value="{{$form->password}}"/>
+                            <input type="password" name="password" class="form-control" />
                         @endif
                         </div>
                         <div class="form-group">
@@ -62,7 +61,7 @@
                             </textarea>
                         </div>
                         <div class="form-group">    
-                            <label for="role">役柄</label>
+                            <label for="role">求める人</label>
                             <input type="text" name="role" class="form-control" value="{{$form->role}}"/>
                         </div>
                         <div class="form-group">
@@ -74,10 +73,7 @@
                             <input type="text" name="contact" class="form-control" value="{{$form->contact}}"/>
                         @endif    
                         </div>
-                        <div class="form-group">    
-                            <label for="image">画像リンク</label>
-                            <input type="text" name="image" class="form-control" value="{{$form->image}}"/>
-                        </div>
+                        
                          <div class="form-group">    
                             <label for="video">動画リンク</label>
                             <input type="text" name="video" class="form-control" value="{{$form->video}}"/>

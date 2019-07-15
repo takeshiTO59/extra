@@ -23,7 +23,6 @@ class CreateArticleTable extends Migration
             $table->string('location',45)->nullable();
             $table->string('contents',1024)->nullable();
             $table->string('role',45)->nullable();
-            $table->string('image',1024)->nullable();
             $table->string('video',1024)->nullable();
             $table->string('caution',45)->nullable();
             $table->string('contact',45)->nullable();

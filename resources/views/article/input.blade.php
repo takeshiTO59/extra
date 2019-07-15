@@ -1,5 +1,5 @@
 @include('common.header')
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <section class="cd-scrolling-bg cd-color">
             <article class="cd-container">
                 <h1>募集情報入力</h1>
@@ -15,10 +15,10 @@
                         
                         <div class="form-group">
                         @if ($errors->has('nickname'))
-                            <label for="nickname">主催者ニックネーム<span class="label label-danger">必須</span><font color="red">ニックネームが入力されていません。</font></label>
+                            <label for="nickname">組織 (会社・学校・グループ等)<span class="label label-danger">必須</span><font color="red">ニックネームが入力されていません。</font></label>
                             <input type="text" name="nickname" class="form-control" />
                         @else 
-                            <label for="nickname">主催者ニックネーム<span class="label label-danger">必須</span></label>
+                            <label for="nickname">組織 (会社・学校・グループ等)<span class="label label-danger">必須</span></label>
                             <input type="text" name="nickname" class="form-control" />
                         @endif
                         </div>
@@ -35,7 +35,7 @@
                         @if ($errors->has('title'))
                             <label for="title">タイトル</label><span class="label label-danger">必須</span><font color="red">パスワードが入力されていません。</font></label>
                             <input type="text" name="title" class="form-control" />
-                         @else    
+                        @else    
                             <label for="title">タイトル<span class="label label-danger">必須</span></label>
                             <input type="text" name="title" class="form-control" />
                         @endif
@@ -75,40 +75,87 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">    
-                            <label for="location">場所</label>
+                        <div class="form-group">
+                        @if ($errors->has('location'))    
+                            <label for="location">場所<font color="red">100文字以内に収めてください。</font></label>
                             <input type="text" name="location" class="form-control"/>    
                         </div>
-                        <div class="form-group">    
-                            <label for="contents">撮影内容</label>
-                            <textarea name="contents" cols="30" row="10" class="form-control">
-                            </textarea>
+                        <div class="form-group">
+                        @else 
+                            <label for="location">場所</label>
+                            <input type="text" name="location" class="form-control"/>    
+                        @endif
                         </div>
-                        <div class="form-group">    
-                            <label for="role">役柄</label>
+                        <div class="form-group"> 
+                        @if($errors->has('contents'))
+                            <script type="text/javascript" src="/original/public/js/contents.js"></script>
+                            <label for="contents">撮影内容<font color="red">5000文字以内に収めてください。</font></label>
+                            <p>
+                                <span id="textCount">0</span>文字入力しました。
+                                あと<span id="textLest">5000</span>文字入力できます。
+                            </p>
+                            <textarea id="textArea" name="contents" cols="30" row="10" class="form-control"></textarea>
+                            <p id="textAttention" style="display:none; color:red;">入力文字数が多すぎます。</p>
+                            
+                        </div>
+                        <div class="form-group"> 
+                        @else
+                            <script type="text/javascript" src="/original/public/js/contents.js"></script>
+                            <label for="contents">撮影内容</label>
+                            <p>
+                                <span id="textCount">0</span>文字入力しました。
+                                あと<span id="textLest">5000</span>文字入力できます。
+                            </p>
+                            <textarea id="textArea" name="contents" cols="30" row="10" class="form-control"></textarea>
+                            <p id="textAttention" style="display:none; color:red;">入力文字数が多すぎます。</p>
+                        @endif    
+                        </div>
+                        <div class="form-group">
+                        @if ($errors->has('role'))    
+                            <label for="role">求める人<font color="red">100文字以内に収めてください。</font></label>
                             <input type="text" name="role" class="form-control"/>
                         </div>
                         <div class="form-group">
+                        @else
+                            <label for="role">求める人</label>
+                            <input type="text" name="role" class="form-control"/>
+                        @endif
+                        </div>
+                        <div class="form-group">
                         @if ($errors->has('contact'))    
-                            <label for="contact">担当者連絡先リンク<span class="label label-danger">必須</span></label><font color="red">連絡先リンクが入力されていません。</font></label>
+                            <label for="contact">担当者連絡先リンク(主催者代表のSNSアカウント名、メールアドレスなど)<span class="label label-danger">必須</span></label><font color="red">連絡先リンクが入力されていません。</font></label>
                             <input type="text" name="contact" class="form-control" />
                         @else 
-                            <label for="contact">担当者連絡先リンク<span class="label label-danger">必須</span></label>
+                            <label for="contact">担当者連絡先リンク(主催者代表のSNSアカウント名、メールアドレスなど)<span class="label label-danger">必須</span></label>
                             <input type="text" name="contact" class="form-control" />
                         @endif    
-                        </div>
-                        <div class="form-group">    
-                            <label for="image">画像リンク</label>
-                            <input type="text" name="image" class="form-control"/>
                         </div>
                          <div class="form-group">    
                             <label for="video">動画リンク</label>
                             <input type="text" name="video" class="form-control"/>
                         </div>
                         <div class="form-group">
+                        @if($errors->has('caution'))    
+                            <script type="text/javascript" src="/original/public/js/caution.js"></script>
+                            <label for="caution">注意事項<font color="red">5000文字以内に収めてください。</font></label>
+                            <p>
+                                <span id="textCount2">0</span>文字入力しました。
+                                あと<span id="textLest2">5000</span>文字入力できます。
+                            </p>
+                            <textarea id="textArea2" name="caution" row="10" class="form-control"></textarea>
+                            <p id="textAttention2" style="display:none; color:red;">入力文字数が多すぎます。</p>
+                        </div>
+                        <div class="form-group">
+                        @else    
+                            <script type="text/javascript" src="/original/public/js/caution.js"></script>
                             <label for="caution">注意事項</label>
-                            <textarea name="caution" row="10" class="form-control">
-                            </textarea>
+                            <p>
+                                <span id="textCount2">0</span>文字入力しました。
+                                あと<span id="textLest2">5000</span>文字入力できます。
+                            </p>
+                            <textarea id="textArea2" name="caution" row="10" class="form-control"></textarea>
+                            <p id="textAttention2" style="display:none; color:red;">入力文字数が多すぎます。</p>
+                        @endif
                         </div>
                         <div class="submit">   
                             <a href="javascript:history.back()">戻る</a>

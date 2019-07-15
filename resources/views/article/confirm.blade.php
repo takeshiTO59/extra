@@ -10,7 +10,7 @@
                                     {{ csrf_field()}}
                                     <input type="hidden" name="today" value="{{ $today }}">
                                 <tr>    
-                                    <th>主催者ニックネーム</th>
+                                    <th>組織 (会社・学校・グループ等)</th>
                                     <td>{{ $nickname }}</td>
                                     <input type="hidden" name="nickname" value="{{ $nickname }}">
                                 </tr>
@@ -53,11 +53,6 @@
                                     <th>役柄</th>
                                     <td>{{ $role }}</td>
                                     <input type="hidden" name="role" value="{{ $role }}">
-                                </tr>
-                                <tr>    
-                                    <th>画像リンク</th>
-                                    <td>{{ $image }}</td>
-                                    <input type="hidden" name="image" value="{{ $image }}">
                                 </tr>
                                 <tr>    
                                     <th>動画リンク</th>

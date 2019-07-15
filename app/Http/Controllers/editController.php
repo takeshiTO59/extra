@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-
+use Illuminate\Support\Facades\Hash;
 
 
 class editController extends Controller
@@ -13,40 +14,58 @@ class editController extends Controller
     public function check(Request $request){
         
         $param =['id' => $request->id];
+        
         $item = DB::select('select * from article_table where id = :id',$param);
         return view('edit.check',[
-            'msg'=>0,
+            'msg'=>0,           //入力前の表示
             'form'=> $item[0]
             ]);
     }
     
-    public function index(Request $request){
+     public function confirmerror(Request $request){
+        $id = $request->session()->get('id');
+        $password = $request->session()->get('password');
+        
+        $param =[
+                'id' => $id,
+                'password' => $password
+                ];
+                
+        $item = DB::select('select today, nickname, title, id, deadline, format, period, location, contents, role, video, caution, contact from article_table where id = :id and password = :password',$param);
+        return view('edit.index',['form'=> $item[0]]);
+    }
+    
+    
+    
+    public function confirmcheck(Request $request){
         $validate_rule = [
             'id' => 'required',
             'password' => 'required',
             ];
         $this->validate($request, $validate_rule);
+    
+        $hashedpassword = DB::table('article_table')->where('id', $request->id)->value('password');
         
-        $param =[
-            'id' => $request->id,
-            'password' => $request->password,
+        if (Hash::check($request->password, $hashedpassword)) {
+            $request->session()->put('id', $request->id);
+            $request->session()->put('password',$hashedpassword);
+            // 一致したときの処理
+            $param =[
+                'id' => $request->id,
+                'password' => $hashedpassword
                 ];
-        
-        $item = DB::select('select today, nickname, title, id, password, deadline, format, period, location, contents, role, image, video, caution, contact from article_table where id = :id and password = :password',$param);
-        if(count($item) == 0){
-            //ログイン失敗の時
+            $item = DB::select('select today, nickname, title, id, deadline, format, period, location, contents, role, video, caution, contact from article_table where id = :id and password = :password',$param);
+            return view('edit.index',['form'=> $item[0]]);
+        } else {
+            $request->session()->flush();
+            // 一致しなかったときの処理
             $item = DB::select('select nickname,title,id from article_table where id = :id',['id' => $request->id]);
             return view('edit.check',[
                 'msg'=>1,
                 'form'=> $item[0]
                 ]);
-        }else{
-            //ログイン成功時の処理
-            
-            return view('edit.index',['form'=> $item[0]]); 
         }
-        
-        /*return view('edit.index',['form'=> $item[0]]);*/
+    
     }
 
     public function confirm(Request $request){
@@ -57,6 +76,19 @@ class editController extends Controller
             ];
         $this->validate($request, $validate_rule);
         
+/*        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'nickname' => 'required',
+            'password' =>'required'
+            ]);
+            
+        if ($validator->fails()) {
+            return redirect('edit/index')
+                ->withErrors($validator)
+                ->withInput();
+                }
+        
+*/
         $id = $request->id;
         $title = $request->title;
         $nickname = $request->nickname;
@@ -71,7 +103,6 @@ class editController extends Controller
         $location = $request->location;
         $contents = $request->contents;
         $role = $request->role;
-        $image = $request->image;
         $video = $request->video;
         $caution = $request->caution;
         $contact = $request->contact;
@@ -94,12 +125,9 @@ class editController extends Controller
             'location' =>$location,
             'contents' =>$contents,
             'role' =>$role,
-            'image' =>$image,
             'video' =>$video,
             'caution' =>$caution,
             'contact'=>$contact, 
-            
-            
             ];
         
         return view('edit.confirm',$data);
@@ -120,13 +148,12 @@ class editController extends Controller
             'location' =>$request->location,
             'contents' =>$request->contents,
             'role' =>$request->role,
-            'image' =>$request->image,
             'video' =>$request->video,
             'caution' =>$request->caution,
             'contact' =>$request->contact,
             ];
         
-        DB::update('update article_table set today =:today, nickname = :nickname, title = :title, password = :password, deadline = :deadline, format = :format, period = :period, location = :location, contents = :contents, role = :role, image = :image, video = :video, caution = :caution, contact = :contact where id = :id', $param);    
+        DB::update('update article_table set today =:today, nickname = :nickname, title = :title, password = :password, deadline = :deadline, format = :format, period = :period, location = :location, contents = :contents, role = :role, video = :video, caution = :caution, contact = :contact where id = :id', $param);    
         return view('edit.complete');
     } 
     

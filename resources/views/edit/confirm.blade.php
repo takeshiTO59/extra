@@ -15,7 +15,7 @@
                                     <input type="hidden" name="id" value="{{$id}}">
                                     
                                 <tr>    
-                                    <th>主催者ニックネーム</th>
+                                    <th>組織 (会社・学校・グループ等)</th>
                                     <td>{{ $nickname }}</td>
                                     <input type="hidden" name="nickname" value="{{ $nickname }}">
                                 </tr>
@@ -55,7 +55,7 @@
                                     <input type="hidden" name="contents" value="{{ $contents }}">
                                 </tr>
                                 <tr>
-                                    <th>役柄</th>
+                                    <th>求める人</th>
                                     <td>{{ $role }}</td>
                                     <input type="hidden" name="role" value="{{ $role }}">
                                 </tr>
@@ -64,11 +64,7 @@
                                     <td>{{ $contact }}</td>
                                     <input type="hidden" name="contact" value="{{ $contact }}">
                                 </tr>
-                                <tr>
-                                    <th>画像リンク</th>
-                                    <td>{{ $image }}</td>
-                                    <input type="hidden" name="image" value="{{ $image }}">
-                                </tr>
+                                
                                 <tr>
                                     <th>動画リンク</th>
                                     <td>{{ $video }}</td>

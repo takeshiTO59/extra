@@ -13,7 +13,7 @@
                                 
                                 <input type="hidden" name="id" value="{{$form->id}}">
                                 <div class="form-group">
-                                <p>主催者ニックネーム</p>
+                                <p>組織 (会社・学校・グループ等)</p>
                                 <p>{{$form->nickname}}</p>
                                 </div>
                                 <div class="form-group">
