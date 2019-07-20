@@ -80,5 +80,5 @@
                 </div>    
             </article>
         </section>
-    </body>
-</html>
+        
+@include('common.footer')

@@ -165,5 +165,4 @@
                 </form>
             </article>      
         </section>
-    </body>
-</html>
+@include('common.footer')

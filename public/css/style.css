@@ -171,6 +171,7 @@ h1 {
 .table>thead>tr>th {
   padding: 20px;
   border-bottom: thin solid #D5D5D5;
+  
 }
 
 table{
@@ -183,8 +184,11 @@ th, td {
   padding: 15px;
   overflow: hidden;
   text-overflow: ellipsis;
-  
   border-bottom: thin solid #D5D5D5;
+}
+
+th{
+   width: 20%;
 }
 
 td{

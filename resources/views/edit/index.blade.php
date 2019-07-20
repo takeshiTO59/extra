@@ -90,6 +90,6 @@
                     </div><!-- col-sm-8 -->
                 </form>
             </div><!--container -->
-        </div>    
-    </body>        
-</html>
+        </div>
+        
+@include('common.footer')

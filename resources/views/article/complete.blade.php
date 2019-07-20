@@ -12,5 +12,5 @@
                 </div>
             </article><!--cd-container -->
         </section>
-    </body>
-</html>
+        
+@include('common.footer')
