@@ -3,7 +3,7 @@
     <div class="cd-scrolling-bg cd-color">
         <div class="cd-container">
             <div class="table-responsive">
-                <h1>編集</h1>
+                <h1>編集ページ</h1>
                 <h2>確認画面</h2>
                 <form action="/original/public/edit/complete" method ="post" >    
                     {{ csrf_field()}}                
