@@ -26,7 +26,7 @@
                             <input type="text" name="nickname" class="form-control" value="{{$form->nickname}}"/>
                         @endif
                         </div>
-                         <div class="form-group">
+                        <div class="form-group">
                         @if ($errors->has('password'))
                             <label for="password">パスワード<span class="label label-danger">必須</span><font color="red">パスワードが入力されていません。</font></label>
                             <input type="password" name="password" class="form-control" />
@@ -37,7 +37,7 @@
                         </div>
                         <div class="form-group">
                         @if ($errors->has('title'))
-                            <label for="title">タイトル</label><span class="label label-danger">必須</span><font color="red">パスワードが入力されていません。</font></label>
+                            <label for="title">タイトル</label><span class="label label-danger">必須</span><font color="red">タイトルが入力されていません。</font></label>
                             <input type="text" name="title" class="form-control" />
                         @else    
                             <label for="title">タイトル<span class="label label-danger">必須</span></label>
