@@ -2,7 +2,7 @@
 
         <div class="cd-scrolling-bg cd-color">
             <div class="cd-container">
-                <h1>編集</h1>
+                <h1>編集ページ</h1>
                 
                 <form action="/original/public/edit/confirm" method ="post" class="row">
                     
@@ -36,52 +36,131 @@
                         @endif
                         </div>
                         <div class="form-group">
-                            <label for="title">タイトル</label>
-                            <input type="text" name="title" class="form-control" value="{{$form->title}}"/>
+                        @if ($errors->has('title'))
+                            <label for="title">タイトル</label><span class="label label-danger">必須</span><font color="red">パスワードが入力されていません。</font></label>
+                            <input type="text" name="title" class="form-control" />
+                        @else    
+                            <label for="title">タイトル<span class="label label-danger">必須</span></label>
+                            <input type="text" name="title" class="form-control" />
+                        @endif
                         </div>
                         <div class="form-group">
-                        <label for="deadline">申込み締め切り日</label>
-                        <input type="text" name="deadline" class="form-control" value="{{$form->deadline}}"/>    
+                            <label for="deadline">申込み締め切り日</label>
+                            <input type="date" name="deadline" class="form-control"/>    
                         </div>
                         <div class="form-group">
-                            <label for="format">映像ジャンル</label>
-                            <input type="text" name="format" class="form-control" value="{{$form->format}}"/>
+                            <p class="control-label"><b>映像ジャンル</b></p>
+                            <div class="radio-inline"> 
+                                <input type="radio" name="format"  value="映画"　checked="checked"/>
+                                    <label for="cinema">映画</label>
+                            </div>
+                            <div class="radio-inline">
+                                <input type="radio" name="format"  value="テレビ"/>
+                                    <label for="tv">テレビ</label>
+                            </div>
+                            <div class="radio-inline">
+                                <input type="radio" name="format"  value="インターネット動画"/>
+                                    <label for="internet">インターネット動画</label>
+                            </div>
+                            <div class="radio-inline">
+                                <input type="radio" name="format"  value="自主映画"/>
+                                    <label for="internet">自主制作映画</label>
+                            </div>
+                        </div>
+                        <label for="period">期間</label>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <input type="date" name="period" class="form-control" />
+                                </div>
+                                <div class="col-xs-1 help-block">～</div>
+                                <div class="col-xs-4">
+                                    <input type="date" name="period" class="form-control" />
+                                </div>
+                            </div>
                         </div>
                         <div class="form-group">
-                            <label for="period">期間</label>
-                            <input type="text" name="period" class="form-control" value="{{$form->period}}"/>
+                        @if ($errors->has('location'))    
+                            <label for="location">場所<font color="red">100文字以内に収めてください。</font></label>
+                            <input type="text" name="location" class="form-control"/>    
                         </div>
-                        <div class="form-group">    
+                        <div class="form-group">
+                        @else 
                             <label for="location">場所</label>
-                            <input type="text" name="location" class="form-control" value="{{$form->location}}"/>    
+                            <input type="text" name="location" class="form-control"/>    
+                        @endif
                         </div>
-                        <div class="form-group">    
+                        <div class="form-group"> 
+                        @if($errors->has('contents'))
+                            <script type="text/javascript" src="/original/public/js/contents.js"></script>
+                            <label for="contents">撮影内容<font color="red">5000文字以内に収めてください。</font></label>
+                            <p>
+                                <span id="textCount">0</span>文字入力しました。
+                                あと<span id="textLest">5000</span>文字入力できます。
+                            </p>
+                            <textarea id="textArea" name="contents" cols="30" row="10" class="form-control"></textarea>
+                            <p id="textAttention" style="display:none; color:red;">入力文字数が多すぎます。</p>
+                            
+                        </div>
+                        <div class="form-group"> 
+                        @else
+                            <script type="text/javascript" src="/original/public/js/contents.js"></script>
                             <label for="contents">撮影内容</label>
-                            <textarea name="contents" cols="30" row="10" class="form-control" value="{{$form->contents}}"/>
-                            </textarea>
+                            <p>
+                                <span id="textCount">0</span>文字入力しました。
+                                あと<span id="textLest">5000</span>文字入力できます。
+                            </p>
+                            <textarea id="textArea" name="contents" cols="30" row="10" class="form-control"></textarea>
+                            <p id="textAttention" style="display:none; color:red;">入力文字数が多すぎます。</p>
+                        @endif    
                         </div>
-                        <div class="form-group">    
+                        <div class="form-group">
+                        @if ($errors->has('role'))    
+                            <label for="role">求める人<font color="red">100文字以内に収めてください。</font></label>
+                            <input type="text" name="role" class="form-control"/>
+                        </div>
+                        <div class="form-group">
+                        @else
                             <label for="role">求める人</label>
-                            <input type="text" name="role" class="form-control" value="{{$form->role}}"/>
+                            <input type="text" name="role" class="form-control"/>
+                        @endif
                         </div>
                         <div class="form-group">
                         @if ($errors->has('contact'))    
-                            <label for="contact">担当者連絡先リンク<span class="label label-danger">必須</span></label><font color="red">連絡先リンクが入力されていません。</font></label>
-                            <input type="text" name="contact" class="form-control" value="{{$form->contact}}"/>
+                            <label for="contact">担当者連絡先リンク(主催者代表のSNSアカウント名、メールアドレスなど)<span class="label label-danger">必須</span></label>
+                            <br><font color="red">連絡先リンクが入力されていません。</font></label>
+                            <input type="text" name="contact" class="form-control" />
                         @else 
-                            <label for="contact">担当者連絡先リンク<span class="label label-danger">必須</span></label>
-                            <input type="text" name="contact" class="form-control" value="{{$form->contact}}"/>
+                            <label for="contact">担当者連絡先リンク(主催者代表のSNSアカウント名、メールアドレスなど)<span class="label label-danger">必須</span></label>
+                            <input type="text" name="contact" class="form-control" />
                         @endif    
                         </div>
-                        
-                         <div class="form-group">    
+                        <div class="form-group">    
                             <label for="video">動画リンク</label>
                             <input type="text" name="video" class="form-control" value="{{$form->video}}"/>
                         </div>
                         <div class="form-group">
+                        @if($errors->has('caution'))    
+                            <script type="text/javascript" src="/original/public/js/caution.js"></script>
+                            <label for="caution">注意事項<font color="red">5000文字以内に収めてください。</font></label>
+                            <p>
+                                <span id="textCount2">0</span>文字入力しました。
+                                あと<span id="textLest2">5000</span>文字入力できます。
+                            </p>
+                            <textarea id="textArea2" name="caution" row="10" class="form-control"></textarea>
+                            <p id="textAttention2" style="display:none; color:red;">入力文字数が多すぎます。</p>
+                        </div>
+                        <div class="form-group">
+                        @else    
+                            <script type="text/javascript" src="/original/public/js/caution.js"></script>
                             <label for="caution">注意事項</label>
-                            <textarea name="caution" row="10" class="form-control" value="{{$form->caution}}">
-                            </textarea>
+                            <p>
+                                <span id="textCount2">0</span>文字入力しました。
+                                あと<span id="textLest2">5000</span>文字入力できます。
+                            </p>
+                            <textarea id="textArea2" name="caution" row="10" class="form-control"></textarea>
+                            <p id="textAttention2" style="display:none; color:red;">入力文字数が多すぎます。</p>
+                        @endif
                         </div>
                         <div class="submit">   
                             <a href="javascript:history.back()">戻る</a>

@@ -2,7 +2,7 @@
 
         <div class="cd-scrolling-bg cd-color">
             <div class="cd-container">   
-                <h1>エキストラ募集一覧</h1>
+                <h1>投稿者確認</h1>
                 <form action="/original/public/edit/index" method ="post" class="row">
                     {{ csrf_field()}}
                     <div class="col-sm-8 col-sm-offset-2">

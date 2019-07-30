@@ -22,21 +22,19 @@ class editController extends Controller
             ]);
     }
     
-     public function confirmerror(Request $request){
+    public function confirmerror(Request $request){
         $id = $request->session()->get('id');
         $password = $request->session()->get('password');
         
         $param =[
                 'id' => $id,
                 'password' => $password
-                ];
+            ];
                 
         $item = DB::select('select today, nickname, title, id, deadline, format, period, location, contents, role, video, caution, contact from article_table where id = :id and password = :password',$param);
         return view('edit.index',['form'=> $item[0]]);
     }
-    
-    
-    
+   
     public function confirmcheck(Request $request){
         $validate_rule = [
             'id' => 'required',
@@ -72,31 +70,21 @@ class editController extends Controller
         $validate_rule = [
             'title' => 'required',
             'nickname' => 'required',
-            'password' =>'required'
-            ];
+            'password' => 'required',
+            'contact'  => 'required',
+            'location' => 'max:100',
+            'role'     => 'max:100',
+            'contents' => 'max:5000',
+            'caution'  => 'max:5000'
+        ];
         $this->validate($request, $validate_rule);
         
-/*        $validator = Validator::make($request->all(), [
-            'title' => 'required',
-            'nickname' => 'required',
-            'password' =>'required'
-            ]);
-            
-        if ($validator->fails()) {
-            return redirect('edit/index')
-                ->withErrors($validator)
-                ->withInput();
-                }
+        $hashed = Hash::make($request->password);
         
-*/
         $id = $request->id;
         $title = $request->title;
         $nickname = $request->nickname;
-        $password = $request->password;
-        
-        $title = $request->title;
-        $nickname = $request->nickname;
-        $password = $request->password;
+        $password = $hashed;
         $deadline = $request->deadline;
         $format = $request->format;
         $period = $request->period;
@@ -109,9 +97,7 @@ class editController extends Controller
         
         $dt = Carbon::now();
         $today = $dt->timestamp;
-        
-        
-        
+
         $data = [
             'today' =>$today,
             'id' => $id,
@@ -156,8 +142,6 @@ class editController extends Controller
         DB::update('update article_table set today =:today, nickname = :nickname, title = :title, password = :password, deadline = :deadline, format = :format, period = :period, location = :location, contents = :contents, role = :role, video = :video, caution = :caution, contact = :contact where id = :id', $param);    
         return view('edit.complete');
     } 
-    
-    
     
 }
 

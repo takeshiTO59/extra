@@ -33,7 +33,7 @@
                         </div>
                         <div class="form-group">
                         @if ($errors->has('title'))
-                            <label for="title">タイトル</label><span class="label label-danger">必須</span><font color="red">パスワードが入力されていません。</font></label>
+                            <label for="title">タイトル</label><span class="label label-danger">必須</span><font color="red">タイトルが入力されていません。</font></label>
                             <input type="text" name="title" class="form-control" />
                         @else    
                             <label for="title">タイトル<span class="label label-danger">必須</span></label>
@@ -66,11 +66,11 @@
                         <label for="period">期間</label>
                         <div class="form-group">
                             <div class="row">
-                                <div class="col-xs-3">
+                                <div class="col-xs-4">
                                     <input type="date" name="period" class="form-control" />
                                 </div>
                                 <div class="col-xs-1 help-block">～</div>
-                                <div class="col-xs-3">
+                                <div class="col-xs-4">
                                     <input type="date" name="period" class="form-control" />
                                 </div>
                             </div>
@@ -123,7 +123,8 @@
                         </div>
                         <div class="form-group">
                         @if ($errors->has('contact'))    
-                            <label for="contact">担当者連絡先リンク(主催者代表のSNSアカウント名、メールアドレスなど)<span class="label label-danger">必須</span></label><font color="red">連絡先リンクが入力されていません。</font></label>
+                            <label for="contact">担当者連絡先リンク(主催者代表のSNSアカウント名、メールアドレスなど)<span class="label label-danger">必須</span>
+                            <br></label><font color="red">連絡先リンクが入力されていません。</font></label>
                             <input type="text" name="contact" class="form-control" />
                         @else 
                             <label for="contact">担当者連絡先リンク(主催者代表のSNSアカウント名、メールアドレスなど)<span class="label label-danger">必須</span></label>

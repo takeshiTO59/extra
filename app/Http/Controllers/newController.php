@@ -26,12 +26,12 @@ class newController extends Controller
             'role'     => 'max:100',
             'contents' => 'max:5000',
             'caution'  => 'max:5000'
-            ];
+        ];
+        
         $this->validate($request, $validate_rule);
        
         $hashed = Hash::make($request->password);
         
-       
         $title = $request->title;
         $nickname = $request->nickname;
         $password = $hashed;
@@ -44,8 +44,6 @@ class newController extends Controller
         $video = $request->video;
         $caution = $request->caution;
         $contact = $request->contact;
-        
-        
         
         $dt = Carbon::now();
         $today = $dt->timestamp;
@@ -69,10 +67,6 @@ class newController extends Controller
         return view('article.confirm',$data);
     }
     
-/*    public function complete(Request $request){
-        return view('article.complete');
-    }
-*/ 
     public function create(Request $request){
        
         $param = [
@@ -91,14 +85,8 @@ class newController extends Controller
             'contact' =>$request->contact,
             ];
             
-            
-                
         DB::insert('insert into article_table(today, nickname, title, password, deadline, format, period, location, contents, role, video, caution, contact) values(:today, :nickname, :title, :password, :deadline, :format, :period, :location, :contents, :role, :video, :caution, :contact)', $param);
         return view('article.complete');
-           /* return view('article.complete');*/
     } 
-    
-    
+
 }
-//(:today, :nickname, :title, :password, :deadline, :format, :period, :location, :contents, :role, :image, :video, :caution, :contact)
-//(today, nickname, title, password, deadline, format, period, location, contents, role, image, video, caution, contact)
